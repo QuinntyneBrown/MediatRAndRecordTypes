@@ -1,8 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3EB9D9B0-F8E4-4FD6-84F8-7AAE48DDCDBC}"
+	ProjectSection(SolutionItems) = preProject
+		cliSettings.json = cliSettings.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C6876FFD-02C6-46DE-B683-601169B10768}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatRAndRecordTypes.Api", "src\MediatRAndRecordTypes.Api\MediatRAndRecordTypes.Api.csproj", "{6DDDA730-8771-4962-B8BC-69CE6CCDEC75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,5 +23,25 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E075AA67-692E-48EE-8EE5-2F56E0D471FA}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6DDDA730-8771-4962-B8BC-69CE6CCDEC75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DDDA730-8771-4962-B8BC-69CE6CCDEC75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DDDA730-8771-4962-B8BC-69CE6CCDEC75}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6DDDA730-8771-4962-B8BC-69CE6CCDEC75}.Debug|x64.Build.0 = Debug|Any CPU
+		{6DDDA730-8771-4962-B8BC-69CE6CCDEC75}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6DDDA730-8771-4962-B8BC-69CE6CCDEC75}.Debug|x86.Build.0 = Debug|Any CPU
+		{6DDDA730-8771-4962-B8BC-69CE6CCDEC75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DDDA730-8771-4962-B8BC-69CE6CCDEC75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DDDA730-8771-4962-B8BC-69CE6CCDEC75}.Release|x64.ActiveCfg = Release|Any CPU
+		{6DDDA730-8771-4962-B8BC-69CE6CCDEC75}.Release|x64.Build.0 = Release|Any CPU
+		{6DDDA730-8771-4962-B8BC-69CE6CCDEC75}.Release|x86.ActiveCfg = Release|Any CPU
+		{6DDDA730-8771-4962-B8BC-69CE6CCDEC75}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6DDDA730-8771-4962-B8BC-69CE6CCDEC75} = {C6876FFD-02C6-46DE-B683-601169B10768}
 	EndGlobalSection
 EndGlobal
