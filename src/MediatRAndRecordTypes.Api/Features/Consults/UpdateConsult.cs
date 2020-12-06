@@ -18,7 +18,8 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
 
             public Handler(IAppDbContext context) => _context = context;
 
-            public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
+            public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
+            {
 
                 var consult = await _context.FindAsync<Consult>(request.Consult.ConsultId);
 

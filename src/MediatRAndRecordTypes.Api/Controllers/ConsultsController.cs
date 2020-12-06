@@ -32,7 +32,7 @@ namespace MediatRAndRecordTypes.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task Remove([FromRoute]RemoveConsult.Request request)
+        public async Task Remove([FromRoute] RemoveConsult.Request request)
             => await _mediator.Send(request);
 
         [HttpGet("{consultId}", Name = "GetConsultByIdRoute")]
@@ -40,7 +40,7 @@ namespace MediatRAndRecordTypes.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(GetConsultById.Response), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult<GetConsultById.Response>> GetById([FromRoute]GetConsultById.Request request)
+        public async Task<ActionResult<GetConsultById.Response>> GetById([FromRoute] GetConsultById.Request request)
         {
             var response = await _mediator.Send(request);
 
@@ -57,6 +57,6 @@ namespace MediatRAndRecordTypes.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(GetConsults.Response), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<GetConsults.Response>> Get()
-            => await _mediator.Send(new GetConsults.Request());           
+            => await _mediator.Send(new GetConsults.Request());
     }
 }
