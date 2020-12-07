@@ -8,7 +8,7 @@ namespace MediatRAndRecordTypes.Api.Models
         public Consult(Guid customerId, DateTime startDate, DateTime endDate)
         {
             CustomerId = customerId;
-            DateRange = DateRange.Create(startDate,endDate).Value;
+            DateRange = DateRange.Create(startDate, endDate).Value;
         }
 
         private Consult() { }

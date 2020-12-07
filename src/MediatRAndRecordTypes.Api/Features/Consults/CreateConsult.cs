@@ -21,7 +21,7 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
 
-                var consult = new Consult(request.Consult.CustomerId,request.Consult.StartDate,request.Consult.EndDate);
+                var consult = new Consult(request.Consult.CustomerId, request.Consult.StartDate, request.Consult.EndDate);
 
                 _context.Add(consult);
 

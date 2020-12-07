@@ -9,7 +9,7 @@ namespace MediatRAndRecordTypes.Testing.Builders
 
         public static ConsultDto WithDefaults()
         {
-            return new ConsultDto(default,default,DateTime.UtcNow, DateTime.UtcNow.AddHours(1));
+            return new ConsultDto(default, default, DateTime.UtcNow, DateTime.UtcNow.AddHours(1));
         }
 
         public ConsultDtoBuilder()

@@ -13,7 +13,7 @@ using Xunit;
 
 namespace MediatRAndRecordTypes.IntegrationTests
 {
-    public class ConsultsControllerTests: IClassFixture<ApiTestFixture>
+    public class ConsultsControllerTests : IClassFixture<ApiTestFixture>
     {
         private readonly ApiTestFixture _fixture;
         public ConsultsControllerTests(ApiTestFixture fixture)
@@ -75,7 +75,7 @@ namespace MediatRAndRecordTypes.IntegrationTests
             var httpResponseMessage = await _fixture.CreateClient().PutAsync(Endpoints.Put.UpdateConsult, stringContent);
 
             httpResponseMessage.EnsureSuccessStatusCode();
-            
+
             context.ChangeTracker.Clear();
 
             var sut = await context.FindAsync<Consult>(consult.ConsultId);

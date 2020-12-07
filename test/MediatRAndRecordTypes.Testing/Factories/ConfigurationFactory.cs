@@ -9,7 +9,7 @@ namespace MediatRAndRecordTypes.Testing.Factories
 
         public static IConfiguration Create()
         {
-            if(_configuration == null)
+            if (_configuration == null)
             {
                 var basePath = Path.GetFullPath(@"../../../../../src/MediatRAndRecordTypes.Api");
 
