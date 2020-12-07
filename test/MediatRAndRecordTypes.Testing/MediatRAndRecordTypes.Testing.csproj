@@ -5,12 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="builders\**" />
-    <EmbeddedResource Remove="builders\**" />
-    <None Remove="builders\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\src\MediatRAndRecordTypes.Api\MediatRAndRecordTypes.Api.csproj" />
   </ItemGroup>
 
