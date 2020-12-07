@@ -25,9 +25,36 @@ namespace MediatRAndRecordTypes.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("ConsultId");
 
                     b.ToTable("Consults");
+                });
+
+            modelBuilder.Entity("MediatRAndRecordTypes.Api.Models.Consult", b =>
+                {
+                    b.OwnsOne("MediatRAndRecordTypes.Api.ValueObjects.DateRange", "DateRange", b1 =>
+                        {
+                            b1.Property<Guid>("ConsultId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<DateTime>("EndDate")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<DateTime>("StartDate")
+                                .HasColumnType("datetime2");
+
+                            b1.HasKey("ConsultId");
+
+                            b1.ToTable("Consults");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ConsultId");
+                        });
+
+                    b.Navigation("DateRange");
                 });
 #pragma warning restore 612, 618
         }

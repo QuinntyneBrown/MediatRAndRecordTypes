@@ -12,7 +12,6 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
 
         public record Response(ConsultDto Consult);
 
-
         public class Handler : IRequestHandler<Request, Response>
         {
             private readonly IAppDbContext _context;
@@ -22,7 +21,7 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
 
-                var consult = new Consult();
+                var consult = new Consult(request.Consult.CustomerId,request.Consult.StartDate,request.Consult.EndDate);
 
                 _context.Add(consult);
 

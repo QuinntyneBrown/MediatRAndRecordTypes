@@ -1,51 +1,51 @@
 using CSharpFunctionalExtensions;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace MediatRAndRecordTypes.Api.ValueObjects
 {
+    [Owned]
     public class DateRange : ValueObject
     {
-        public const int MaxLength = 250;
         [JsonProperty]
-        public string Value { get; private set; }
+        public DateTime StartDate { get; private set; }
+        [JsonProperty]
+        public DateTime EndDate { get; private set; }
+        public int Days => (EndDate.Date - StartDate.Date).Days;
+        public int Hours => (int)(EndDate - StartDate).TotalHours;
 
         protected DateRange()
         {
 
         }
 
-        private DateRange(string value)
+        private DateRange(DateTime startDate, DateTime endDate)
         {
-            Value = value;
-        }
-
-        public static Result<DateRange> Create(string value)
-        {
-            value = (value ?? string.Empty).Trim();
-
-            if (value.Length == 0)
-                return Result.Failure<DateRange>("DateRange should not be empty.");
-
-            if (value.Length > MaxLength)
-                return Result.Failure<DateRange>("DateRange name is too long.");
-
-            return Result.Success(new DateRange(value));
+            StartDate = startDate;
+            EndDate = endDate;
         }
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            yield return Value;
+            yield return StartDate;
+            yield return EndDate;
         }
 
-        public static implicit operator string(DateRange dateRange)
+        public static Result<DateRange> Create(DateTime startDate, DateTime endDate)
         {
-            return dateRange.Value;
+            if (startDate > endDate)
+                return Result.Failure<DateRange>("Start Date should be less than End Date");
+
+            return Result.Success(new DateRange(startDate, endDate));
         }
 
-        public static explicit operator DateRange(string dateRange)
+        public bool Overlap(DateRange dateRange)
         {
-            return Create(dateRange).Value;
+            _ = dateRange ?? throw new ArgumentNullException(nameof(dateRange));
+
+            return StartDate < dateRange.EndDate && dateRange.StartDate < EndDate;
         }
     }
 }

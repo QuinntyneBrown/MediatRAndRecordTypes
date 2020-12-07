@@ -1,6 +1,7 @@
 using MediatR;
 using MediatRAndRecordTypes.Api.Data;
 using MediatRAndRecordTypes.Api.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
             public async Task<Unit> Handle(Request request, CancellationToken cancellationToken)
             {
 
-                var consult = await _context.FindAsync<Consult>(request.ConsultId);
+                var consult = await _context.Consults.SingleOrDefaultAsync(x => x.ConsultId == request.ConsultId);
 
                 _context.Remove(consult);
 

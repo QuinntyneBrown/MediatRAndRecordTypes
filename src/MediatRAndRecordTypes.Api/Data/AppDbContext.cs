@@ -14,9 +14,5 @@ namespace MediatRAndRecordTypes.Api.Data
 
         public DbSet<Consult> Consults { get; private set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-
-        }
     }
 }

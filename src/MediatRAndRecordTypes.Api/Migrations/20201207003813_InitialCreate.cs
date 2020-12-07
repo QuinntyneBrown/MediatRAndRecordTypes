@@ -11,7 +11,10 @@ namespace MediatRAndRecordTypes.Api.Migrations
                 name: "Consults",
                 columns: table => new
                 {
-                    ConsultId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ConsultId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DateRange_StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DateRange_EndDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
