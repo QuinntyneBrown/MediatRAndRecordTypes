@@ -1,6 +1,5 @@
 using MediatR;
 using MediatRAndRecordTypes.Api.Data;
-using MediatRAndRecordTypes.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
