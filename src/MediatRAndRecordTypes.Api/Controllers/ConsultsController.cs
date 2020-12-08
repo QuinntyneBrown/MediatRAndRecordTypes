@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MediatRAndRecordTypes.Api.Controllers
 {
     [ApiController]
-    [Route("api/consults")]
+    [Route("api/[controller]")]
     public class ConsultsController
     {
         private readonly IMediator _mediator;
@@ -21,11 +21,11 @@ namespace MediatRAndRecordTypes.Api.Controllers
         public async Task<ActionResult<CreateConsult.Response>> Create([FromBody] CreateConsult.Request request)
             => await _mediator.Send(request);
 
-        [HttpPut(Name = "UpdateConsultRoute")]
+        [HttpPut(Name = "RescheduleConsultRoute")]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType(typeof(UpdateConsult.Response), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<UpdateConsult.Response>> Update([FromBody] UpdateConsult.Request request)
+        [ProducesResponseType(typeof(Reschedule.Response), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Reschedule.Response>> Reschedule([FromBody] Reschedule.Request request)
             => await _mediator.Send(request);
 
         [HttpDelete("{consultId}", Name = "RemoveConsultRoute")]

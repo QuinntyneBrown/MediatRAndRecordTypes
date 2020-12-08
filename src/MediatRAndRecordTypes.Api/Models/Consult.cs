@@ -1,25 +1,40 @@
-﻿using MediatRAndRecordTypes.Api.ValueObjects;
+﻿using MediatRAndRecordTypes.Api.Data;
+using MediatRAndRecordTypes.Api.ValueObjects;
 using System;
+using System.Linq;
 
 namespace MediatRAndRecordTypes.Api.Models
 {
     public class Consult
     {
-        public Consult(Guid customerId, DateTime startDate, DateTime endDate)
+        public Consult(Guid clientId, DateTime startDate, DateTime endDate)
         {
-            CustomerId = customerId;
+            ClientId = clientId;
             DateRange = DateRange.Create(startDate, endDate).Value;
         }
 
         private Consult() { }
 
         public Guid ConsultId { get; private set; }
-        public Guid CustomerId { get; private set; }
+        public Guid ClientId { get; private set; }
         public DateRange DateRange { get; private set; }
 
-        public void ChangeDateRange(DateTime startDate, DateTime endDate)
+        public void Reschedule(DateTime startDate, DateTime endDate)
         {
             DateRange = DateRange.Create(startDate, endDate).Value;
+        }
+
+        public void EnsureValid(IAppDbContext context)
+        {
+            if (DateRange.StartDate > DateRange.EndDate)
+            {
+                throw new Exception("Start Date should be less than End Date");
+            }
+
+            if (context.Consults.Any(x => x.ConsultId != ConsultId && x.DateRange.Overlap(DateRange)))
+            {
+                throw new Exception("Overlap");
+            }
         }
     }
 }

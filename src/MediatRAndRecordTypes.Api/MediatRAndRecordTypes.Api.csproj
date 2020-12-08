@@ -29,7 +29,6 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Features\" />
     <Folder Include="ValueObjects\" />
   </ItemGroup>
 

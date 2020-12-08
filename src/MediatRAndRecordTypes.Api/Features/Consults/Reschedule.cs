@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MediatRAndRecordTypes.Api.Features.Consults
 {
-    public class UpdateConsult
+    public class Reschedule
     {
         public record Request(ConsultDto Consult) : IRequest<Response>;
 
@@ -23,7 +23,9 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
 
                 var consult = await _context.FindAsync<Consult>(request.Consult.ConsultId);
 
-                consult.ChangeDateRange(request.Consult.StartDate, request.Consult.EndDate);
+                consult.Reschedule(request.Consult.StartDate, request.Consult.EndDate);
+
+                consult.EnsureValid(_context);
 
                 await _context.SaveChangesAsync(cancellationToken);
 

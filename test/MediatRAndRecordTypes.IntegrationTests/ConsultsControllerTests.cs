@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using static MediatRAndRecordTypes.IntegrationTests.ConsultsControllerEndpoints;
 
 namespace MediatRAndRecordTypes.IntegrationTests
 {
@@ -32,7 +33,7 @@ namespace MediatRAndRecordTypes.IntegrationTests
 
             using var client = _fixture.CreateClient();
 
-            var httpResponseMessage = await client.PostAsync(Endpoints.Post.CreateConsult, stringContent);
+            var httpResponseMessage = await client.PostAsync(Post.CreateConsult, stringContent);
 
             var response = JsonConvert.DeserializeObject<CreateConsult.Response>(await httpResponseMessage.Content.ReadAsStringAsync());
 
@@ -52,13 +53,13 @@ namespace MediatRAndRecordTypes.IntegrationTests
 
             context.SaveChanges();
 
-            var httpResponseMessage = await _fixture.CreateClient().DeleteAsync(Endpoints.Delete.ConsultBy(consult.ConsultId));
+            var httpResponseMessage = await _fixture.CreateClient().DeleteAsync(Delete.ConsultBy(consult.ConsultId));
 
             httpResponseMessage.EnsureSuccessStatusCode();
         }
 
         [Fact]
-        public async Task Should_UpdateConsult()
+        public async Task Should_RescheduleConsult()
         {
             var consult = ConsultBuilder.WithDefaults();
 
@@ -72,7 +73,7 @@ namespace MediatRAndRecordTypes.IntegrationTests
 
             StringContent stringContent = new StringContent(JsonConvert.SerializeObject(new { consult = consult.ToDto() with { EndDate = newEndDate } }), Encoding.UTF8, "application/json");
 
-            var httpResponseMessage = await _fixture.CreateClient().PutAsync(Endpoints.Put.UpdateConsult, stringContent);
+            var httpResponseMessage = await _fixture.CreateClient().PutAsync(Put.Reschedule, stringContent);
 
             httpResponseMessage.EnsureSuccessStatusCode();
 
@@ -94,7 +95,7 @@ namespace MediatRAndRecordTypes.IntegrationTests
 
             context.SaveChanges();
 
-            var httpResponseMessage = await _fixture.CreateClient().GetAsync(Endpoints.Get.Consults);
+            var httpResponseMessage = await _fixture.CreateClient().GetAsync(Get.Consults);
 
             httpResponseMessage.EnsureSuccessStatusCode();
 
@@ -114,7 +115,7 @@ namespace MediatRAndRecordTypes.IntegrationTests
 
             context.SaveChanges();
 
-            var httpResponseMessage = await _fixture.CreateClient().GetAsync(Endpoints.Get.ConsultBy(consult.ConsultId));
+            var httpResponseMessage = await _fixture.CreateClient().GetAsync(Get.ConsultBy(consult.ConsultId));
 
             httpResponseMessage.EnsureSuccessStatusCode();
 
@@ -123,37 +124,6 @@ namespace MediatRAndRecordTypes.IntegrationTests
             Assert.Equal(consult.DateRange.StartDate, response.Consult.StartDate);
 
             Assert.Equal(consult.DateRange.EndDate, response.Consult.EndDate);
-        }
-
-
-        internal static class Endpoints
-        {
-            public static class Post
-            {
-                public static string CreateConsult = "api/consults";
-            }
-
-            public static class Put
-            {
-                public static string UpdateConsult = "api/consults";
-            }
-
-            public static class Delete
-            {
-                public static string ConsultBy(Guid consultId)
-                {
-                    return $"api/consults/{consultId}";
-                }
-            }
-
-            public static class Get
-            {
-                public static string Consults = "api/consults";
-                public static string ConsultBy(Guid consultId)
-                {
-                    return $"api/consults/{consultId}";
-                }
-            }
         }
     }
 }

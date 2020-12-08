@@ -23,6 +23,8 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
 
                 var consult = new Consult(request.Consult.CustomerId, request.Consult.StartDate, request.Consult.EndDate);
 
+                consult.EnsureValid(_context);
+
                 _context.Add(consult);
 
                 await _context.SaveChangesAsync(cancellationToken);

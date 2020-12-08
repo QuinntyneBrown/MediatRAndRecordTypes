@@ -1,1 +1,8 @@
-{"RootNamespace":"MediatRAndRecordTypes","Namespace":"MediatRAndRecordTypes.Api","Domain":"MediatRAndRecordTypes.Domain","Api":"MediatRAndRecordTypes.Api","Core":"MediatRAndRecordTypes.Core","EntityIdDataType":"Guid"}
+{
+  "RootNamespace": "MediatRAndRecordTypes",
+  "Namespace": "MediatRAndRecordTypes.Api",
+  "Domain": "",
+  "Api": "MediatRAndRecordTypes.Api",
+  "Core": "",
+  "EntityIdDataType": "Guid"
+}
