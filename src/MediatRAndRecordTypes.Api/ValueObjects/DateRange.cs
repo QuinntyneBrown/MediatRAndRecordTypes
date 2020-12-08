@@ -40,12 +40,5 @@ namespace MediatRAndRecordTypes.Api.ValueObjects
 
             return Result.Success(new DateRange(startDate, endDate));
         }
-
-        public bool Overlap(DateRange dateRange)
-        {
-            _ = dateRange ?? throw new ArgumentNullException(nameof(dateRange));
-
-            return StartDate < dateRange.EndDate && dateRange.StartDate < EndDate;
-        }
     }
 }

@@ -25,7 +25,7 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
 
                 consult.Reschedule(request.Consult.StartDate, request.Consult.EndDate);
 
-                consult.EnsureValid(_context);
+                consult.EnsureAvailability(_context);
 
                 await _context.SaveChangesAsync(cancellationToken);
 

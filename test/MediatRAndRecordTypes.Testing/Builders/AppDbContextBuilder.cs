@@ -1,6 +1,7 @@
 using MediatRAndRecordTypes.Api.Data;
 using MediatRAndRecordTypes.Testing.Factories;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace MediatRAndRecordTypes.Testing.Builders
 {
@@ -20,6 +21,29 @@ namespace MediatRAndRecordTypes.Testing.Builders
         public AppDbContextBuilder()
         {
             _testDbContext = WithDefaults();
+        }
+
+        public AppDbContextBuilder UseInMemoryDatabase()
+        {
+            _testDbContext = new AppDbContext(new DbContextOptionsBuilder()
+                .UseInMemoryDatabase($"{Guid.NewGuid()}")
+                .Options);
+
+            return this;
+        }
+
+        public AppDbContextBuilder Add(object entity)
+        {
+            _testDbContext.Add(entity);
+
+            return this;
+        }
+
+        public AppDbContextBuilder SaveChanges()
+        {
+            _testDbContext.SaveChanges();
+
+            return this;
         }
 
         public AppDbContext Build()

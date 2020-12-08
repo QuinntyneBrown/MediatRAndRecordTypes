@@ -23,7 +23,7 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
 
                 var consult = new Consult(request.Consult.CustomerId, request.Consult.StartDate, request.Consult.EndDate);
 
-                consult.EnsureValid(_context);
+                consult.EnsureAvailability(_context);
 
                 _context.Add(consult);
 

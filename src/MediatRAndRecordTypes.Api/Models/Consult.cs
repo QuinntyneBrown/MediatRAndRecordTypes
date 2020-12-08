@@ -24,17 +24,18 @@ namespace MediatRAndRecordTypes.Api.Models
             DateRange = DateRange.Create(startDate, endDate).Value;
         }
 
-        public void EnsureValid(IAppDbContext context)
+        public void EnsureAvailability(IAppDbContext context)
         {
-            if (DateRange.StartDate > DateRange.EndDate)
-            {
-                throw new Exception("Start Date should be less than End Date");
-            }
+            var consults = context.Consults.ToList();
 
-            if (context.Consults.Any(x => x.ConsultId != ConsultId && x.DateRange.Overlap(DateRange)))
+            if (context.Consults.Any(x => x.ConsultId != ConsultId
+            && DateRange.StartDate < x.DateRange.EndDate
+            && x.DateRange.StartDate < DateRange.EndDate))
             {
                 throw new Exception("Overlap");
             }
+
         }
+
     }
 }
