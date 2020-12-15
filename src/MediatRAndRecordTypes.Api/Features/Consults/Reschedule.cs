@@ -1,5 +1,6 @@
 using MediatR;
 using MediatRAndRecordTypes.Api.Data;
+using MediatRAndRecordTypes.Api.IntegrationEvents;
 using MediatRAndRecordTypes.Api.Models;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,8 +16,12 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
         public class Handler : IRequestHandler<Request, Response>
         {
             private readonly IAppDbContext _context;
-
-            public Handler(IAppDbContext context) => _context = context;
+            private readonly IMediator _mediator;
+            public Handler(IAppDbContext context, IMediator mediator)
+            {
+                _context = context;
+                _mediator = mediator;
+            }
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
@@ -28,6 +33,8 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
                 consult.EnsureAvailability(_context);
 
                 await _context.SaveChangesAsync(cancellationToken);
+
+                await _mediator.Publish(new ConsultRescheduled(consult));
 
                 return new Response(consult.ToDto());
             }

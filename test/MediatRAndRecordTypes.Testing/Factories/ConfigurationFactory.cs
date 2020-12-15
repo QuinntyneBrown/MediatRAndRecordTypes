@@ -11,13 +11,12 @@ namespace MediatRAndRecordTypes.Testing.Factories
         {
             if (_configuration == null)
             {
-                var basePath = Path.GetFullPath(@"../../../../../src/MediatRAndRecordTypes.Api");
+                var basePath = Path.GetFullPath(@$"../../../../../src/MediatRAndRecordTypes.Api");
 
                 _configuration = new ConfigurationBuilder()
                     .SetBasePath(basePath)
                     .AddJsonFile("appsettings.json")
                     .Build();
-
             }
 
             return _configuration;

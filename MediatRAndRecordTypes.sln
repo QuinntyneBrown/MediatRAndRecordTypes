@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3EB9D9B0-F8E4-4FD6-84F8-7AAE48DDCDBC}"
 	ProjectSection(SolutionItems) = preProject
 		cliSettings.json = cliSettings.json
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C6876FFD-02C6-46DE-B683-601169B10768}"
@@ -18,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatRAndRecordTypes.Integ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatRAndRecordTypes.Testing", "test\MediatRAndRecordTypes.Testing\MediatRAndRecordTypes.Testing.csproj", "{EFAD5F37-964D-4E8D-B726-A38F9507C2E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatRAndRecordTypes.UnitTests", "test\MediatRAndRecordTypes.UnitTests\MediatRAndRecordTypes.UnitTests.csproj", "{B86B641F-97B6-4BDB-AC6A-860643A7EC4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatRAndRecordTypes.UnitTests", "test\MediatRAndRecordTypes.UnitTests\MediatRAndRecordTypes.UnitTests.csproj", "{B86B641F-97B6-4BDB-AC6A-860643A7EC4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
