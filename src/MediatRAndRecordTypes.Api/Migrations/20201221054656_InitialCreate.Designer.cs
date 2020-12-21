@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MediatRAndRecordTypes.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20201208161421_InitialCreate")]
+    [Migration("20201221054656_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,7 +37,7 @@ namespace MediatRAndRecordTypes.Api.Migrations
 
             modelBuilder.Entity("MediatRAndRecordTypes.Api.Models.Consult", b =>
                 {
-                    b.OwnsOne("MediatRAndRecordTypes.Api.ValueObjects.DateRange", "DateRange", b1 =>
+                    b.OwnsOne("MediatRAndRecordTypes.Api.Models.DateRange", "DateRange", b1 =>
                         {
                             b1.Property<Guid>("ConsultId")
                                 .HasColumnType("uniqueidentifier");

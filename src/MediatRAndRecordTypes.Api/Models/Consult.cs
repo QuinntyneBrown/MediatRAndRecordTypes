@@ -13,7 +13,10 @@ namespace MediatRAndRecordTypes.Api.Models
             DateRange = DateRange.Create(startDate, endDate).Value;
         }
 
-        private Consult() { }
+        private Consult()
+        {
+
+        }
 
         public Guid ConsultId { get; private set; }
         public Guid ClientId { get; private set; }

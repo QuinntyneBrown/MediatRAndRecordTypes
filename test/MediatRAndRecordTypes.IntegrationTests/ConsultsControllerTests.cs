@@ -25,6 +25,7 @@ namespace MediatRAndRecordTypes.IntegrationTests
         [Fact]
         public async Task Should_CreateConsult()
         {
+
             var context = AppDbContextBuilder.WithDefaults();
 
             var consult = ConsultDtoBuilder.WithDefaults();
@@ -40,6 +41,7 @@ namespace MediatRAndRecordTypes.IntegrationTests
             var sut = context.FindAsync<Consult>(response.Consult.ConsultId);
 
             Assert.NotEqual(default, response.Consult.ConsultId);
+
         }
 
         [Fact]

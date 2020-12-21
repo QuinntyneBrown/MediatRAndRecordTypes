@@ -35,7 +35,7 @@ namespace MediatRAndRecordTypes.Api.Migrations
 
             modelBuilder.Entity("MediatRAndRecordTypes.Api.Models.Consult", b =>
                 {
-                    b.OwnsOne("MediatRAndRecordTypes.Api.ValueObjects.DateRange", "DateRange", b1 =>
+                    b.OwnsOne("MediatRAndRecordTypes.Api.Models.DateRange", "DateRange", b1 =>
                         {
                             b1.Property<Guid>("ConsultId")
                                 .HasColumnType("uniqueidentifier");
