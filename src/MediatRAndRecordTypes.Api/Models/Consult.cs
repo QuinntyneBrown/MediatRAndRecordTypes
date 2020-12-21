@@ -1,5 +1,4 @@
 ﻿using MediatRAndRecordTypes.Api.Data;
-using MediatRAndRecordTypes.Api.ValueObjects;
 using System;
 using System.Linq;
 
@@ -9,6 +8,7 @@ namespace MediatRAndRecordTypes.Api.Models
     {
         public Consult(Guid clientId, DateTime startDate, DateTime endDate)
         {
+            ConsultId = Guid.NewGuid();
             ClientId = clientId;
             DateRange = DateRange.Create(startDate, endDate).Value;
         }

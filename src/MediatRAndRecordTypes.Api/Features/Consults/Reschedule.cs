@@ -25,7 +25,6 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
-
                 var consult = await _context.FindAsync<Consult>(request.Consult.ConsultId);
 
                 consult.Reschedule(request.Consult.StartDate, request.Consult.EndDate);
@@ -36,7 +35,7 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
 
                 await _mediator.Publish(new ConsultRescheduled(consult));
 
-                return new Response(consult.ToDto());
+                return new (consult.ToDto());
             }
         }
     }

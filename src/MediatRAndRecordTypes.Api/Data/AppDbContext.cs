@@ -10,7 +10,7 @@ namespace MediatRAndRecordTypes.Api.Data
             : base(options) { }
 
         public static readonly ILoggerFactory ConsoleLoggerFactory
-            = LoggerFactory.Create(builder => { builder.AddConsole(); });
+            = LoggerFactory.Create(builder => builder.AddConsole());
 
         public DbSet<Consult> Consults { get; private set; }
 

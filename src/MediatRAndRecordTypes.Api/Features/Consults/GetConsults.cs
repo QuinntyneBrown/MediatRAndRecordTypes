@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.QueryTrackingBehavior;
 
 namespace MediatRAndRecordTypes.Api.Features.Consults
 {
@@ -22,7 +23,11 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
             public Handler(IAppDbContext context) => _context = context;
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-                => new Response(await _context.Set<Consult>().Select(x => x.ToDto()).ToListAsync());
+            {
+                _context.ChangeTracker.QueryTrackingBehavior = NoTracking;
+
+                return new (await _context.Consults.Select(x => x.ToDto()).ToListAsync());
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ using MediatRAndRecordTypes.Api.Models;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.QueryTrackingBehavior;
 
 namespace MediatRAndRecordTypes.Api.Features.Consults
 {
@@ -21,10 +22,11 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
+                _context.ChangeTracker.QueryTrackingBehavior = NoTracking;
 
                 var consult = await _context.FindAsync<Consult>(request.ConsultId);
 
-                return new Response(consult.ToDto());
+                return new (consult.ToDto());
             }
         }
     }

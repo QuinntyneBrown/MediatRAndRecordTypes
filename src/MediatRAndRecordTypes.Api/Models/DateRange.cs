@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace MediatRAndRecordTypes.Api.ValueObjects
+namespace MediatRAndRecordTypes.Api.Models
 {
     [Owned]
     public class DateRange : ValueObject

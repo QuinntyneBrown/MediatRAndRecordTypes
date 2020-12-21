@@ -30,7 +30,6 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="IntegrationEvents\" />
-    <Folder Include="ValueObjects\" />
   </ItemGroup>
 
 </Project>

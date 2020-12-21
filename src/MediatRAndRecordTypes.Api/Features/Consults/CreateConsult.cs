@@ -29,7 +29,7 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
 
                 await _context.SaveChangesAsync(cancellationToken);
 
-                return new Response(consult.ToDto());
+                return new (consult.ToDto());
             }
         }
     }
