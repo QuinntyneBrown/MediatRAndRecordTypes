@@ -35,7 +35,7 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
 
                 await _mediator.Publish(new ConsultRescheduled(consult));
 
-                return new (consult.ToDto());
+                return new(consult.ToDto());
             }
         }
     }

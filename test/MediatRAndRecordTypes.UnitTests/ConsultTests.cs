@@ -19,7 +19,7 @@ namespace MediatRAndRecordTypes.UnitTests
 
             var consult = new Consult(NewGuid(), startDate: UtcNow, endDate: UtcNow);
 
-            consult.EnsureAvailability(context);            
+            consult.EnsureAvailability(context);
         }
 
         [Fact]
@@ -37,7 +37,7 @@ namespace MediatRAndRecordTypes.UnitTests
                 .SaveChanges()
                 .Build();
 
-            var consult =  new Consult(NewGuid(), startDate: UtcNow.AddHours(-1), endDate: UtcNow.AddHours(.5));
+            var consult = new Consult(NewGuid(), startDate: UtcNow.AddHours(-1), endDate: UtcNow.AddHours(.5));
 
             Assert.Throws<Exception>(() => consult.EnsureAvailability(context));
         }

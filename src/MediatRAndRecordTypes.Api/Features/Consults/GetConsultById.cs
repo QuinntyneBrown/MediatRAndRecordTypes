@@ -26,7 +26,7 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
 
                 var consult = await _context.FindAsync<Consult>(request.ConsultId);
 
-                return new (consult.ToDto());
+                return new(consult.ToDto());
             }
         }
     }

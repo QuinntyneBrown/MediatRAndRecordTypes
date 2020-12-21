@@ -1,6 +1,5 @@
 using MediatR;
 using MediatRAndRecordTypes.Api.Data;
-using MediatRAndRecordTypes.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +25,7 @@ namespace MediatRAndRecordTypes.Api.Features.Consults
             {
                 _context.ChangeTracker.QueryTrackingBehavior = NoTracking;
 
-                return new (await _context.Consults.Select(x => x.ToDto()).ToListAsync());
+                return new(await _context.Consults.Select(x => x.ToDto()).ToListAsync(cancellationToken));
             }
         }
     }

@@ -26,7 +26,7 @@ namespace MediatRAndRecordTypes.Api.Models
 
         public void EnsureAvailability(IAppDbContext context)
         {
-            if (context.Consults.Any(x => x.ConsultId != ConsultId 
+            if (context.Consults.Any(x => x.ConsultId != ConsultId
             && DateRange.StartDate < x.DateRange.EndDate && x.DateRange.StartDate < DateRange.EndDate))
             {
                 throw new Exception("Overlap");
