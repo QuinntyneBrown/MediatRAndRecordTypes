@@ -1,4 +1,4 @@
-using MediatRAndRecordTypes.Api.Features.Consults;
+using MediatRAndRecordTypes.Api.Features;
 using System;
 
 namespace MediatRAndRecordTypes.Testing.Builders

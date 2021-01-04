@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MediatRAndRecordTypes.Api.Features.Consults
+namespace MediatRAndRecordTypes.Api.Features
 {
     public class RemoveConsult
     {

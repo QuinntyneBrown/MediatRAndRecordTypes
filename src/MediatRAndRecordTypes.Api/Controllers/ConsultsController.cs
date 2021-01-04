@@ -1,5 +1,5 @@
 using MediatR;
-using MediatRAndRecordTypes.Api.Features.Consults;
+using MediatRAndRecordTypes.Api.Features;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Threading.Tasks;

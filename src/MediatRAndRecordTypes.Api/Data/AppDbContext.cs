@@ -6,13 +6,12 @@ namespace MediatRAndRecordTypes.Api.Data
 {
     public class AppDbContext : DbContext, IAppDbContext
     {
-        public AppDbContext(DbContextOptions options)
-            : base(options) { }
+        public DbSet<Consult> Consults { get; private set; }
 
         public static readonly ILoggerFactory ConsoleLoggerFactory
             = LoggerFactory.Create(builder => builder.AddConsole());
-
-        public DbSet<Consult> Consults { get; private set; }
-
+        
+        public AppDbContext(DbContextOptions options)
+            : base(options) { }
     }
 }

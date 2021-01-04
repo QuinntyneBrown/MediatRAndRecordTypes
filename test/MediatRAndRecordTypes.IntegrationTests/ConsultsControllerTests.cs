@@ -1,5 +1,4 @@
 using MediatRAndRecordTypes.Api.Features;
-using MediatRAndRecordTypes.Api.Features.Consults;
 using MediatRAndRecordTypes.Api.Models;
 using MediatRAndRecordTypes.Testing;
 using MediatRAndRecordTypes.Testing.Builders;

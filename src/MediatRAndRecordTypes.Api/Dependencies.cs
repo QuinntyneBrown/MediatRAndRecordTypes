@@ -1,6 +1,6 @@
 using MediatR;
 using MediatRAndRecordTypes.Api.Data;
-using MediatRAndRecordTypes.Api.Features.Consults;
+using MediatRAndRecordTypes.Api.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

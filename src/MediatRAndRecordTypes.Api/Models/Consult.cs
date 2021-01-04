@@ -6,6 +6,10 @@ namespace MediatRAndRecordTypes.Api.Models
 {
     public class Consult
     {
+        public Guid ConsultId { get; init; }
+        public Guid ClientId { get; private set; }
+        public DateRange DateRange { get; private set; }
+
         public Consult(Guid clientId, DateTime startDate, DateTime endDate)
         {
             ConsultId = Guid.NewGuid();
@@ -17,10 +21,6 @@ namespace MediatRAndRecordTypes.Api.Models
         {
 
         }
-
-        public Guid ConsultId { get; private set; }
-        public Guid ClientId { get; private set; }
-        public DateRange DateRange { get; private set; }
 
         public void Reschedule(DateTime startDate, DateTime endDate)
         {

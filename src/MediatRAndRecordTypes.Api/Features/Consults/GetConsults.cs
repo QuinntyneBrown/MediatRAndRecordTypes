@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.QueryTrackingBehavior;
 
-namespace MediatRAndRecordTypes.Api.Features.Consults
+namespace MediatRAndRecordTypes.Api.Features
 {
     public class GetConsults
     {
