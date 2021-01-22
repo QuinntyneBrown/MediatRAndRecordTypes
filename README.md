@@ -2,6 +2,10 @@
 
 An example of how you can combine MediatR and the new C# 9 Record types to build an api in the CQRS pattern with relatively minimal code.
 
+## Give a Star! :star:
+
+If you like or are using this project to learn or start your solution, please give it a star. Thanks!
+
 ## How to run locally
 
 1. [Download and install the .NET Core SDK](https://dotnet.microsoft.com/download)
