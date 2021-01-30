@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.QueryTrackingBehavior;
 
 namespace MediatRAndRecordTypes.Api.Features
 {
@@ -23,9 +22,7 @@ namespace MediatRAndRecordTypes.Api.Features
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
-                _context.ChangeTracker.QueryTrackingBehavior = NoTracking;
-
-                return new(await _context.Consults.Select(x => x.ToDto()).ToListAsync(cancellationToken));
+                return new(await _context.AsNoTracking().Consults.Select(x => x.ToDto()).ToListAsync(cancellationToken));
             }
         }
     }

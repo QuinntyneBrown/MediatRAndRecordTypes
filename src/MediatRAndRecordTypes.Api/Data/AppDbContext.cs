@@ -13,5 +13,12 @@ namespace MediatRAndRecordTypes.Api.Data
         
         public AppDbContext(DbContextOptions options)
             : base(options) { }
+
+        public IAppDbContext AsNoTracking()
+        {
+            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
+            return this;
+        }
     }
 }
