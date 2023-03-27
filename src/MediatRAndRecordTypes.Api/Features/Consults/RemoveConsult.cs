@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using MediatR;
 using MediatRAndRecordTypes.Api.Data;
 using Microsoft.EntityFrameworkCore;
@@ -5,29 +8,30 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MediatRAndRecordTypes.Api.Features
+
+namespace MediatRAndRecordTypes.Api.Features;
+
+public class RemoveConsult
 {
-    public class RemoveConsult
+    public record Request(Guid ConsultId) : IRequest<Unit>;
+
+    public class Handler : IRequestHandler<Request, Unit>
     {
-        public record Request(Guid ConsultId) : IRequest<Unit>;
+        private readonly IMediatRAndRecordTypesDbContext _context;
 
-        public class Handler : IRequestHandler<Request, Unit>
+        public Handler(IMediatRAndRecordTypesDbContext context) => _context = context;
+
+        public async Task<Unit> Handle(Request request, CancellationToken cancellationToken)
         {
-            private readonly IAppDbContext _context;
 
-            public Handler(IAppDbContext context) => _context = context;
+            var consult = await _context.Consults.SingleOrDefaultAsync(x => x.ConsultId == request.ConsultId);
 
-            public async Task<Unit> Handle(Request request, CancellationToken cancellationToken)
-            {
+            _context.Remove(consult);
 
-                var consult = await _context.Consults.SingleOrDefaultAsync(x => x.ConsultId == request.ConsultId);
+            await _context.SaveChangesAsync(cancellationToken);
 
-                _context.Remove(consult);
-
-                await _context.SaveChangesAsync(cancellationToken);
-
-                return new Unit { };
-            }
+            return new Unit { };
         }
     }
 }
+

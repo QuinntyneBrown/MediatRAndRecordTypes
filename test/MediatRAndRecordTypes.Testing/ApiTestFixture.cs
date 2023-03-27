@@ -1,30 +1,34 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using MediatRAndRecordTypes.Api;
 using MediatRAndRecordTypes.Testing.Factories;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
 using Respawn;
 
-namespace MediatRAndRecordTypes.Testing
+
+namespace MediatRAndRecordTypes.Testing;
+
+public class ApiTestFixture : WebApplicationFactory<Startup>
 {
-    public class ApiTestFixture : WebApplicationFactory<Startup>
+    private readonly IConfiguration _configuration;
+    private readonly Checkpoint _checkpoint;
+
+    public ApiTestFixture()
     {
-        private readonly IConfiguration _configuration;
-        private readonly Checkpoint _checkpoint;
+        _configuration = ConfigurationFactory.Create();
 
-        public ApiTestFixture()
+
+        _checkpoint = new Checkpoint()
         {
-            _configuration = ConfigurationFactory.Create();
-
-
-            _checkpoint = new Checkpoint()
+            TablesToIgnore = new[]
             {
-                TablesToIgnore = new[]
-                {
-                    "__EFMigrationsHistory"
-                }
-            };
+                "__EFMigrationsHistory"
+            }
+        };
 
-            _checkpoint.Reset(_configuration["Data:DefaultConnection:ConnectionString"]);
-        }
+        _checkpoint.Reset(_configuration["Data:DefaultConnection:ConnectionString"]);
     }
 }
+

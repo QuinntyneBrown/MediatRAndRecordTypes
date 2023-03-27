@@ -1,25 +1,29 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using MediatRAndRecordTypes.Api.Models;
 using System;
 
-namespace MediatRAndRecordTypes.Testing.Builders
+
+namespace MediatRAndRecordTypes.Testing.Builders;
+
+public class ConsultBuilder
 {
-    public class ConsultBuilder
+    private Consult _consult;
+
+    public static Consult WithDefaults()
     {
-        private Consult _consult;
+        return new Consult(default, DateTime.UtcNow, DateTime.UtcNow.AddHours(1));
+    }
 
-        public static Consult WithDefaults()
-        {
-            return new Consult(default, DateTime.UtcNow, DateTime.UtcNow.AddHours(1));
-        }
+    public ConsultBuilder()
+    {
+        _consult = new Consult(default, default, default);
+    }
 
-        public ConsultBuilder()
-        {
-            _consult = new Consult(default, default, default);
-        }
-
-        public Consult Build()
-        {
-            return _consult;
-        }
+    public Consult Build()
+    {
+        return _consult;
     }
 }
+
