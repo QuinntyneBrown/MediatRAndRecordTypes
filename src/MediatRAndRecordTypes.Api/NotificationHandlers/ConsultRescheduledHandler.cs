@@ -3,8 +3,6 @@
 
 using MediatR;
 using MediatRAndRecordTypes.Api.IntegrationEvents;
-using System.Threading;
-using System.Threading.Tasks;
 
 
 namespace MediatRAndRecordTypes.Api.NotificationHandlers;

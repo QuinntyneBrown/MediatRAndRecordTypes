@@ -11,24 +11,21 @@ using System.Threading.Tasks;
 
 namespace MediatRAndRecordTypes.Api.Features;
 
-public class GetConsultById
-{
-    public record Request(Guid ConsultId) : IRequest<Response>;
+ public record GetConsultByIdRequest(Guid ConsultId) : IRequest<GetConsultByIdResponse>;
 
-    public record Response(ConsultDto Consult) : IRequest<Response>;
+ public record GetConsultByIdResponse(ConsultDto Consult) : IRequest<GetConsultByIdResponse>;
 
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IMediatRAndRecordTypesDbContext _context;
+ public class GetConsultByIdHandler : IRequestHandler<GetConsultByIdRequest, GetConsultByIdResponse>
+ {
+     private readonly IMediatRAndRecordTypesDbContext _context;
 
-        public Handler(IMediatRAndRecordTypesDbContext context) => _context = context;
+     public GetConsultByIdHandler(IMediatRAndRecordTypesDbContext context) => _context = context;
 
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-        {
-            var consult = await _context.AsNoTracking().FindAsync<Consult>(request.ConsultId);
+     public async Task<GetConsultByIdResponse> Handle(GetConsultByIdRequest request, CancellationToken cancellationToken)
+     {
+         var consult = await _context.AsNoTracking().FindAsync<Consult>(request.ConsultId);
 
-            return new(consult.ToDto());
-        }
-    }
-}
+         return new(consult.ToDto());
+     }
+ }
 

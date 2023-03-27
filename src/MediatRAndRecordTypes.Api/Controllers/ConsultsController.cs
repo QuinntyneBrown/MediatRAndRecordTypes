@@ -22,30 +22,30 @@ public class ConsultsController
     [HttpPost(Name = "CreateConsultRoute")]
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(CreateConsult.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<CreateConsult.Response>> Create([FromBody] CreateConsult.Request request)
+    [ProducesResponseType(typeof(CreateConsultResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<CreateConsultResponse>> Create([FromBody] CreateConsultRequest request)
         => await _mediator.Send(request);
 
     [HttpPut(Name = "RescheduleConsultRoute")]
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(Reschedule.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<Reschedule.Response>> Reschedule([FromBody] Reschedule.Request request)
+    [ProducesResponseType(typeof(RescheduleResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<RescheduleResponse>> Reschedule([FromBody] RescheduleRequest request)
         => await _mediator.Send(request);
 
     [HttpDelete("{consultId}", Name = "RemoveConsultRoute")]
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.OK)]
-    public async Task Remove([FromRoute] RemoveConsult.Request request)
+    public async Task Remove([FromRoute] RemoveConsultRequest request)
         => await _mediator.Send(request);
 
     [HttpGet("{consultId}", Name = "GetConsultByIdRoute")]
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetConsultById.Response), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(GetConsultByIdResponse), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
-    public async Task<ActionResult<GetConsultById.Response>> GetById([FromRoute] GetConsultById.Request request)
+    public async Task<ActionResult<GetConsultByIdResponse>> GetById([FromRoute] GetConsultByIdRequest request)
     {
         var response = await _mediator.Send(request);
 
@@ -60,8 +60,8 @@ public class ConsultsController
     [HttpGet(Name = "GetConsultsRoute")]
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetConsults.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetConsults.Response>> Get()
-        => await _mediator.Send(new GetConsults.Request());
+    [ProducesResponseType(typeof(GetConsultsResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetConsultsResponse>> Get()
+        => await _mediator.Send(new GetConsultsRequest());
 }
 

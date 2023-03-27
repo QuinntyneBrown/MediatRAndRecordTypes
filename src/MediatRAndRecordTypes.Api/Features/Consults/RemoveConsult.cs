@@ -11,27 +11,23 @@ using System.Threading.Tasks;
 
 namespace MediatRAndRecordTypes.Api.Features;
 
-public class RemoveConsult
-{
-    public record Request(Guid ConsultId) : IRequest<Unit>;
+ public record RemoveConsultRequest(Guid ConsultId) : IRequest;
 
-    public class Handler : IRequestHandler<Request, Unit>
-    {
-        private readonly IMediatRAndRecordTypesDbContext _context;
+ public class RemoveConsultHandler : IRequestHandler<RemoveConsultRequest>
+ {
+     private readonly IMediatRAndRecordTypesDbContext _context;
 
-        public Handler(IMediatRAndRecordTypesDbContext context) => _context = context;
+     public RemoveConsultHandler(IMediatRAndRecordTypesDbContext context) => _context = context;
 
-        public async Task<Unit> Handle(Request request, CancellationToken cancellationToken)
-        {
+     public async Task Handle(RemoveConsultRequest request, CancellationToken cancellationToken)
+     {
 
-            var consult = await _context.Consults.SingleOrDefaultAsync(x => x.ConsultId == request.ConsultId);
+         var consult = await _context.Consults.SingleOrDefaultAsync(x => x.ConsultId == request.ConsultId);
 
-            _context.Remove(consult);
+         _context.Remove(consult);
 
-            await _context.SaveChangesAsync(cancellationToken);
+         await _context.SaveChangesAsync(cancellationToken);
 
-            return new Unit { };
-        }
-    }
-}
+     }
+ }
 

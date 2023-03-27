@@ -12,22 +12,19 @@ using System.Threading.Tasks;
 
 namespace MediatRAndRecordTypes.Api.Features;
 
-public class GetConsults
-{
-    public record Request : IRequest<Response>;
+ public record GetConsultsRequest : IRequest<GetConsultsResponse>;
 
-    public record Response(List<ConsultDto> Consults);
+ public record GetConsultsResponse(List<ConsultDto> Consults);
 
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IMediatRAndRecordTypesDbContext _context;
+ public class GetConsultsHandler : IRequestHandler<GetConsultsRequest, GetConsultsResponse>
+ {
+     private readonly IMediatRAndRecordTypesDbContext _context;
 
-        public Handler(IMediatRAndRecordTypesDbContext context) => _context = context;
+     public GetConsultsHandler(IMediatRAndRecordTypesDbContext context) => _context = context;
 
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-        {
-            return new(await _context.AsNoTracking().Consults.Select(x => x.ToDto()).ToListAsync(cancellationToken));
-        }
-    }
-}
+     public async Task<GetConsultsResponse> Handle(GetConsultsRequest request, CancellationToken cancellationToken)
+     {
+         return new(await _context.AsNoTracking().Consults.Select(x => x.ToDto()).ToListAsync(cancellationToken));
+     }
+ }
 

@@ -10,30 +10,27 @@ using System.Threading.Tasks;
 
 namespace MediatRAndRecordTypes.Api.Features;
 
-public class CreateConsult
-{
-    public record Request(ConsultDto Consult) : IRequest<Response>;
+ public record CreateConsultRequest(ConsultDto Consult) : IRequest<CreateConsultResponse>;
 
-    public record Response(ConsultDto Consult);
+ public record CreateConsultResponse(ConsultDto Consult);
 
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IMediatRAndRecordTypesDbContext _context;
+ public class CreateConsultHandler : IRequestHandler<CreateConsultRequest, CreateConsultResponse>
+ {
+     private readonly IMediatRAndRecordTypesDbContext _context;
 
-        public Handler(IMediatRAndRecordTypesDbContext context) => _context = context;
+     public CreateConsultHandler(IMediatRAndRecordTypesDbContext context) => _context = context;
 
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-        {
-            var consult = new Consult(request.Consult.CustomerId, request.Consult.StartDate, request.Consult.EndDate);
+     public async Task<CreateConsultResponse> Handle(CreateConsultRequest request, CancellationToken cancellationToken)
+     {
+         var consult = new Consult(request.Consult.CustomerId, request.Consult.StartDate, request.Consult.EndDate);
 
-            consult.EnsureAvailability(_context);
+         consult.EnsureAvailability(_context);
 
-            _context.Add(consult);
+         _context.Add(consult);
 
-            await _context.SaveChangesAsync(cancellationToken);
+         await _context.SaveChangesAsync(cancellationToken);
 
-            return new(consult.ToDto());
-        }
-    }
-}
+         return new(consult.ToDto());
+     }
+ }
 

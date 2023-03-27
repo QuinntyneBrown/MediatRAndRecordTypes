@@ -49,7 +49,7 @@ public static class ConfigureServices
 
         services.AddHttpContextAccessor();
 
-        services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining(typeof(GetConsults)));
+        services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining(typeof(GetConsultsRequest)));
 
         services.AddScoped<IMediatRAndRecordTypesDbContext, MediatRAndRecordTypesDbContext>();
 

@@ -39,7 +39,7 @@ public class ConsultsControllerTests : IClassFixture<ApiTestFixture>
 
         var httpResponseMessage = await client.PostAsync(Post.CreateConsult, stringContent);
 
-        var response = JsonConvert.DeserializeObject<CreateConsult.Response>(await httpResponseMessage.Content.ReadAsStringAsync());
+        var response = JsonConvert.DeserializeObject<CreateConsultResponse>(await httpResponseMessage.Content.ReadAsStringAsync());
 
         var sut = context.FindAsync<Consult>(response.Consult.ConsultId);
 
@@ -104,7 +104,7 @@ public class ConsultsControllerTests : IClassFixture<ApiTestFixture>
 
         httpResponseMessage.EnsureSuccessStatusCode();
 
-        var response = JsonConvert.DeserializeObject<GetConsults.Response>(await httpResponseMessage.Content.ReadAsStringAsync());
+        var response = JsonConvert.DeserializeObject<GetConsultsResponse>(await httpResponseMessage.Content.ReadAsStringAsync());
 
         Assert.True(response.Consults.Any());
     }
@@ -124,7 +124,7 @@ public class ConsultsControllerTests : IClassFixture<ApiTestFixture>
 
         httpResponseMessage.EnsureSuccessStatusCode();
 
-        var response = JsonConvert.DeserializeObject<GetConsultById.Response>(await httpResponseMessage.Content.ReadAsStringAsync());
+        var response = JsonConvert.DeserializeObject<GetConsultByIdResponse>(await httpResponseMessage.Content.ReadAsStringAsync());
 
         Assert.Equal(consult.DateRange.StartDate, response.Consult.StartDate);
 

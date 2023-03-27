@@ -2,60 +2,59 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using MediatRAndRecordTypes.Api.Data;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using System;
 using System.Linq;
 
 
-namespace MediatRAndRecordTypes.Api;
+var builder = WebApplication.CreateBuilder(args);
 
-public class Program
+builder.Services.AddApiServices(builder.Configuration);
+
+var app = builder.Build();
+
+app.UseSwagger(options => options.SerializeAsV2 = true);
+
+app.UseSwaggerUI(options =>
 {
-    public static void Main(string[] args)
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Clarity");
+    options.RoutePrefix = string.Empty;
+    options.DisplayOperationId();
+});
+
+app.UseCors("CorsPolicy");
+
+app.UseHttpsRedirection();
+
+app.MapControllers();
+
+var services = (IServiceScopeFactory)app.Services.GetRequiredService(typeof(IServiceScopeFactory));
+
+using (var scope = services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<MediatRAndRecordTypesDbContext>();
+
+    if (args.Contains("ci"))
+        args = new string[] { "dropdb", "migratedb", "stop" };
+
+    if (args.Contains("dropdb"))
     {
-        var host = CreateHostBuilder(args).Build();
-
-        ProcessDbCommands(args, host);
-
-        host.Run();
+        context.Database.EnsureDeleted();
     }
 
-    private static void ProcessDbCommands(string[] args, IHost host)
+    if (args.Contains("migratedb"))
     {
-        var services = (IServiceScopeFactory)host.Services.GetService(typeof(IServiceScopeFactory));
-
-        using (var scope = services.CreateScope())
-        {
-            var context = scope.ServiceProvider.GetRequiredService<MediatRAndRecordTypesDbContext>();
-            var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
-
-            if (args.Contains("ci"))
-                args = new string[3] { "dropdb", "migratedb", "stop" };
-
-            if (args.Contains("dropdb"))
-            {
-                context.Database.EnsureDeleted();
-            }
-
-            if (args.Contains("migratedb"))
-            {
-                context.Database.Migrate();
-            }
-
-            if (args.Contains("stop"))
-                Environment.Exit(0);
-        }
+        context.Database.Migrate();
     }
 
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseStartup<Startup>();
-            });
+    if (args.Contains("stop"))
+        Environment.Exit(0);
 }
 
+app.Run();
+
+
+
+public partial class Program { }
