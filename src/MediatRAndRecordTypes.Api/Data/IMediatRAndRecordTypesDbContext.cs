@@ -4,9 +4,6 @@
 using MediatRAndRecordTypes.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System.Threading;
-using System.Threading.Tasks;
-
 
 namespace MediatRAndRecordTypes.Api.Data;
 

@@ -1,13 +1,10 @@
 // Copyright (c) Quinntyne Brown. All Rights Reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using MediatRAndRecordTypes.Api;
 using MediatRAndRecordTypes.Api.Data;
 using MediatRAndRecordTypes.Api.Features;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
-using System;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -21,7 +18,7 @@ public static class ConfigureServices
             options.SwaggerDoc("v1", new OpenApiInfo
             {
                 Version = "v1",
-                Title = "",
+                Title = "MediatR And Record Types Api",
                 Description = "",
                 TermsOfService = new Uri("https://example.com/terms"),
                 Contact = new OpenApiContact
@@ -36,7 +33,6 @@ public static class ConfigureServices
                 }
             });
 
-            options.CustomSchemaIds(x => x.FullName);
         });
 
         services.AddCors(options => options.AddPolicy("CorsPolicy",

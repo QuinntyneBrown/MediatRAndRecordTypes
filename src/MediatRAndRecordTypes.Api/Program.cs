@@ -2,12 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using MediatRAndRecordTypes.Api.Data;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Linq;
-
 
 var builder = WebApplication.CreateBuilder(args);
 

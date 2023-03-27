@@ -2,9 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using MediatRAndRecordTypes.Api.Data;
-using System;
-using System.Linq;
-
 
 namespace MediatRAndRecordTypes.Api.Models;
 
