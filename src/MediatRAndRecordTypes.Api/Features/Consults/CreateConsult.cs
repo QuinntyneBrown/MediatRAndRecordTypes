@@ -4,33 +4,30 @@
 using MediatR;
 using MediatRAndRecordTypes.Api.Data;
 using MediatRAndRecordTypes.Api.Models;
-using System.Threading;
-using System.Threading.Tasks;
-
 
 namespace MediatRAndRecordTypes.Api.Features;
 
- public record CreateConsultRequest(ConsultDto Consult) : IRequest<CreateConsultResponse>;
+public record CreateConsultRequest(ConsultDto Consult) : IRequest<CreateConsultResponse>;
 
- public record CreateConsultResponse(ConsultDto Consult);
+public record CreateConsultResponse(ConsultDto Consult);
 
- public class CreateConsultHandler : IRequestHandler<CreateConsultRequest, CreateConsultResponse>
- {
-     private readonly IMediatRAndRecordTypesDbContext _context;
+public class CreateConsultHandler : IRequestHandler<CreateConsultRequest, CreateConsultResponse>
+{
+    private readonly IMediatRAndRecordTypesDbContext _context;
 
-     public CreateConsultHandler(IMediatRAndRecordTypesDbContext context) => _context = context;
+    public CreateConsultHandler(IMediatRAndRecordTypesDbContext context) => _context = context;
 
-     public async Task<CreateConsultResponse> Handle(CreateConsultRequest request, CancellationToken cancellationToken)
-     {
-         var consult = new Consult(request.Consult.CustomerId, request.Consult.StartDate, request.Consult.EndDate);
+    public async Task<CreateConsultResponse> Handle(CreateConsultRequest request, CancellationToken cancellationToken)
+    {
+        var consult = new Consult(request.Consult.CustomerId, request.Consult.StartDate, request.Consult.EndDate);
 
-         consult.EnsureAvailability(_context);
+        consult.EnsureAvailability(_context);
 
-         _context.Add(consult);
+        _context.Add(consult);
 
-         await _context.SaveChangesAsync(cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
 
-         return new(consult.ToDto());
-     }
- }
+        return new(consult.ToDto());
+    }
+}
 

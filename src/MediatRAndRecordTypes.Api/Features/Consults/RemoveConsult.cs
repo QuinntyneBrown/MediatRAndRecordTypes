@@ -4,30 +4,26 @@
 using MediatR;
 using MediatRAndRecordTypes.Api.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-
 
 namespace MediatRAndRecordTypes.Api.Features;
 
- public record RemoveConsultRequest(Guid ConsultId) : IRequest;
+public record RemoveConsultRequest(Guid ConsultId) : IRequest;
 
- public class RemoveConsultHandler : IRequestHandler<RemoveConsultRequest>
- {
-     private readonly IMediatRAndRecordTypesDbContext _context;
+public class RemoveConsultHandler : IRequestHandler<RemoveConsultRequest>
+{
+    private readonly IMediatRAndRecordTypesDbContext _context;
 
-     public RemoveConsultHandler(IMediatRAndRecordTypesDbContext context) => _context = context;
+    public RemoveConsultHandler(IMediatRAndRecordTypesDbContext context) => _context = context;
 
-     public async Task Handle(RemoveConsultRequest request, CancellationToken cancellationToken)
-     {
+    public async Task Handle(RemoveConsultRequest request, CancellationToken cancellationToken)
+    {
 
-         var consult = await _context.Consults.SingleOrDefaultAsync(x => x.ConsultId == request.ConsultId);
+        var consult = await _context.Consults.SingleOrDefaultAsync(x => x.ConsultId == request.ConsultId);
 
-         _context.Remove(consult);
+        _context.Remove(consult);
 
-         await _context.SaveChangesAsync(cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
 
-     }
- }
+    }
+}
 

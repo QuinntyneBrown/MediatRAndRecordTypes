@@ -4,27 +4,22 @@
 using MediatR;
 using MediatRAndRecordTypes.Api.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
 
 namespace MediatRAndRecordTypes.Api.Features;
 
- public record GetConsultsRequest : IRequest<GetConsultsResponse>;
+public record GetConsultsRequest : IRequest<GetConsultsResponse>;
 
- public record GetConsultsResponse(List<ConsultDto> Consults);
+public record GetConsultsResponse(List<ConsultDto> Consults);
 
- public class GetConsultsHandler : IRequestHandler<GetConsultsRequest, GetConsultsResponse>
- {
-     private readonly IMediatRAndRecordTypesDbContext _context;
+public class GetConsultsHandler : IRequestHandler<GetConsultsRequest, GetConsultsResponse>
+{
+    private readonly IMediatRAndRecordTypesDbContext _context;
 
-     public GetConsultsHandler(IMediatRAndRecordTypesDbContext context) => _context = context;
+    public GetConsultsHandler(IMediatRAndRecordTypesDbContext context) => _context = context;
 
-     public async Task<GetConsultsResponse> Handle(GetConsultsRequest request, CancellationToken cancellationToken)
-     {
-         return new(await _context.AsNoTracking().Consults.Select(x => x.ToDto()).ToListAsync(cancellationToken));
-     }
- }
+    public async Task<GetConsultsResponse> Handle(GetConsultsRequest request, CancellationToken cancellationToken)
+    {
+        return new(await _context.AsNoTracking().Consults.Select(x => x.ToDto()).ToListAsync(cancellationToken));
+    }
+}
 
