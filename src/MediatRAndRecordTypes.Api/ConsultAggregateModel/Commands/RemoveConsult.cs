@@ -5,7 +5,7 @@ using MediatR;
 using MediatRAndRecordTypes.Api.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace MediatRAndRecordTypes.Api.Features;
+namespace MediatRAndRecordTypes.Api.ConsultAggregateModel.Commands;
 
 public record RemoveConsultRequest(Guid ConsultId) : IRequest;
 

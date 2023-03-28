@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using CSharpFunctionalExtensions;
-using MediatRAndRecordTypes.Api.Models;
+using MediatRAndRecordTypes.Api.ConsultAggregateModel;
 using MediatRAndRecordTypes.Testing.Builders;
 using System;
 using Xunit;

@@ -4,11 +4,10 @@
 using MediatR;
 using MediatRAndRecordTypes.Api.Data;
 using MediatRAndRecordTypes.Api.IntegrationEvents;
-using MediatRAndRecordTypes.Api.Models;
 
-namespace MediatRAndRecordTypes.Api.Features;
+namespace MediatRAndRecordTypes.Api.ConsultAggregateModel.Commands;
 
-public record RescheduleRequest(ConsultDto Consult) : IRequest<RescheduleResponse>;
+public record RescheduleRequest(Guid ConsultId, DateTime StartDate, DateTime EndDate) : IRequest<RescheduleResponse>;
 
 public record RescheduleResponse(ConsultDto Consult);
 
@@ -24,15 +23,15 @@ public class RescheduleHandler : IRequestHandler<RescheduleRequest, RescheduleRe
 
     public async Task<RescheduleResponse> Handle(RescheduleRequest request, CancellationToken cancellationToken)
     {
-        var consult = await _context.FindAsync<Consult>(request.Consult.ConsultId);
+        var consult = await _context.FindAsync<Consult>(request.ConsultId);
 
-        consult.Reschedule(request.Consult.StartDate, request.Consult.EndDate);
+        consult.Reschedule(request.StartDate, request.EndDate);
 
         consult.EnsureAvailability(_context);
 
         await _context.SaveChangesAsync(cancellationToken);
 
-        await _mediator.Publish(new ConsultRescheduled(consult));
+        await _mediator.Publish(new ConsultRescheduled(consult.ConsultId, consult.DateRange.StartDate, consult.DateRange.EndDate));
 
         return new(consult.ToDto());
     }

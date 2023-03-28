@@ -1,10 +1,7 @@
 // Copyright (c) Quinntyne Brown. All Rights Reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using MediatRAndRecordTypes.Api.Models;
-
-
-namespace MediatRAndRecordTypes.Api.Features;
+namespace MediatRAndRecordTypes.Api.ConsultAggregateModel;
 
 public static class ConsultExtensions
 {

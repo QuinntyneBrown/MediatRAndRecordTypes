@@ -1,8 +1,8 @@
 // Copyright (c) Quinntyne Brown. All Rights Reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using MediatRAndRecordTypes.Api.ConsultAggregateModel.Queries;
 using MediatRAndRecordTypes.Api.Data;
-using MediatRAndRecordTypes.Api.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 

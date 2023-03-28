@@ -1,8 +1,9 @@
 // Copyright (c) Quinntyne Brown. All Rights Reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using MediatRAndRecordTypes.Api.Features;
-using MediatRAndRecordTypes.Api.Models;
+using MediatRAndRecordTypes.Api.ConsultAggregateModel;
+using MediatRAndRecordTypes.Api.ConsultAggregateModel.Commands;
+using MediatRAndRecordTypes.Api.ConsultAggregateModel.Queries;
 using MediatRAndRecordTypes.Testing;
 using MediatRAndRecordTypes.Testing.Builders;
 using Newtonsoft.Json;
@@ -13,7 +14,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using static MediatRAndRecordTypes.IntegrationTests.ConsultsControllerEndpoints;
-
 
 namespace MediatRAndRecordTypes.IntegrationTests;
 

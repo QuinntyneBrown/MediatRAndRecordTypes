@@ -3,11 +3,10 @@
 
 using MediatR;
 using MediatRAndRecordTypes.Api.Data;
-using MediatRAndRecordTypes.Api.Models;
 
-namespace MediatRAndRecordTypes.Api.Features;
+namespace MediatRAndRecordTypes.Api.ConsultAggregateModel.Commands;
 
-public record CreateConsultRequest(ConsultDto Consult) : IRequest<CreateConsultResponse>;
+public record CreateConsultRequest(Guid CustomerId, DateTime StartDate, DateTime EndDate) : IRequest<CreateConsultResponse>;
 
 public record CreateConsultResponse(ConsultDto Consult);
 
@@ -19,7 +18,7 @@ public class CreateConsultHandler : IRequestHandler<CreateConsultRequest, Create
 
     public async Task<CreateConsultResponse> Handle(CreateConsultRequest request, CancellationToken cancellationToken)
     {
-        var consult = new Consult(request.Consult.CustomerId, request.Consult.StartDate, request.Consult.EndDate);
+        var consult = new Consult(request.CustomerId, request.StartDate, request.EndDate);
 
         consult.EnsureAvailability(_context);
 

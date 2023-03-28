@@ -3,9 +3,8 @@
 
 using MediatR;
 using MediatRAndRecordTypes.Api.Data;
-using MediatRAndRecordTypes.Api.Models;
 
-namespace MediatRAndRecordTypes.Api.Features;
+namespace MediatRAndRecordTypes.Api.ConsultAggregateModel.Queries;
 
 public record GetConsultByIdRequest(Guid ConsultId) : IRequest<GetConsultByIdResponse>;
 

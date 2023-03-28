@@ -5,7 +5,7 @@ using CSharpFunctionalExtensions;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
-namespace MediatRAndRecordTypes.Api.Models;
+namespace MediatRAndRecordTypes.Api.ConsultAggregateModel;
 
 [Owned]
 public class DateRange : ValueObject

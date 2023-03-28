@@ -2,11 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using MediatR;
-using MediatRAndRecordTypes.Api.Features;
+using MediatRAndRecordTypes.Api.ConsultAggregateModel.Commands;
+using MediatRAndRecordTypes.Api.ConsultAggregateModel.Queries;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using System.Threading.Tasks;
-
 
 namespace MediatRAndRecordTypes.Api.Controllers;
 

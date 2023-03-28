@@ -3,7 +3,7 @@
 
 using MediatRAndRecordTypes.Api.Data;
 
-namespace MediatRAndRecordTypes.Api.Models;
+namespace MediatRAndRecordTypes.Api.ConsultAggregateModel;
 
 public class Consult
 {
