@@ -1,7 +1,6 @@
 // Copyright (c) Quinntyne Brown. All Rights Reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using MediatR;
 using MediatRAndRecordTypes.Api.ConsultAggregateModel.Commands;
 using MediatRAndRecordTypes.Api.ConsultAggregateModel.Queries;
 using Microsoft.AspNetCore.Mvc;

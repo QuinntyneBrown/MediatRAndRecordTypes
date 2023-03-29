@@ -4,6 +4,7 @@
 using MediatRAndRecordTypes.Api.Data;
 using MediatRAndRecordTypes.Testing.Factories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 
 
@@ -18,7 +19,7 @@ public class MediatRAndRecordTypesDbContextBuilder
         var configuration = ConfigurationFactory.Create();
 
         return new MediatRAndRecordTypesDbContext(new DbContextOptionsBuilder()
-            .UseSqlServer(configuration["Data:DefaultConnection:ConnectionString"])
+            .UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
             .Options);
     }
 

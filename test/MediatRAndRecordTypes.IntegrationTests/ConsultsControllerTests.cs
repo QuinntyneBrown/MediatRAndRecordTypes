@@ -31,9 +31,9 @@ public class ConsultsControllerTests : IClassFixture<ApiTestFixture>
 
         var context = MediatRAndRecordTypesDbContextBuilder.WithDefaults();
 
-        var consult = ConsultDtoBuilder.WithDefaults();
+        var request = new CreateConsultRequest(Guid.NewGuid(), DateTime.UtcNow, DateTime.UtcNow.AddHours(1));
 
-        StringContent stringContent = new StringContent(JsonConvert.SerializeObject(new { consult }), Encoding.UTF8, "application/json");
+        StringContent stringContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
         using var client = _fixture.CreateClient();
 
@@ -76,7 +76,9 @@ public class ConsultsControllerTests : IClassFixture<ApiTestFixture>
 
         var newEndDate = DateTime.UtcNow;
 
-        StringContent stringContent = new StringContent(JsonConvert.SerializeObject(new { consult = consult.ToDto() with { EndDate = newEndDate } }), Encoding.UTF8, "application/json");
+        var request = new RescheduleRequest(consult.ConsultId, consult.DateRange.StartDate, newEndDate);
+
+        StringContent stringContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
         var httpResponseMessage = await _fixture.CreateClient().PutAsync(Put.Reschedule, stringContent);
 

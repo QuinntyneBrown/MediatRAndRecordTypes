@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "MediatRAndRecordTypes.Api": {
+    "https": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
