@@ -14,6 +14,12 @@ public class MediatRAndRecordTypesDbContext : DbContext, IMediatRAndRecordTypesD
     public MediatRAndRecordTypesDbContext(DbContextOptions options)
         : base(options) { }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema("MediatRAndRecordTypes");
+
+        base.OnModelCreating(modelBuilder);
+    }
     public IMediatRAndRecordTypesDbContext AsNoTracking()
     {
         ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;

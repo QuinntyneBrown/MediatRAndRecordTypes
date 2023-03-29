@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MediatRAndRecordTypes.Api.Migrations
 {
     [DbContext(typeof(MediatRAndRecordTypesDbContext))]
-    [Migration("20230329013446_MediatRAndRecordTypes_Initial")]
+    [Migration("20230329064938_MediatRAndRecordTypes_Initial")]
     partial class MediatRAndRecordTypes_Initial
     {
         /// <inheritdoc />
@@ -20,6 +20,7 @@ namespace MediatRAndRecordTypes.Api.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("MediatRAndRecordTypes")
                 .HasAnnotation("ProductVersion", "7.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -36,7 +37,7 @@ namespace MediatRAndRecordTypes.Api.Migrations
 
                     b.HasKey("ConsultId");
 
-                    b.ToTable("Consults");
+                    b.ToTable("Consults", "MediatRAndRecordTypes");
                 });
 
             modelBuilder.Entity("MediatRAndRecordTypes.Api.ConsultAggregateModel.Consult", b =>
@@ -54,7 +55,7 @@ namespace MediatRAndRecordTypes.Api.Migrations
 
                             b1.HasKey("ConsultId");
 
-                            b1.ToTable("Consults");
+                            b1.ToTable("Consults", "MediatRAndRecordTypes");
 
                             b1.WithOwner()
                                 .HasForeignKey("ConsultId");

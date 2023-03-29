@@ -11,8 +11,12 @@ namespace MediatRAndRecordTypes.Api.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "MediatRAndRecordTypes");
+
             migrationBuilder.CreateTable(
                 name: "Consults",
+                schema: "MediatRAndRecordTypes",
                 columns: table => new
                 {
                     ConsultId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -30,7 +34,8 @@ namespace MediatRAndRecordTypes.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Consults");
+                name: "Consults",
+                schema: "MediatRAndRecordTypes");
         }
     }
 }

@@ -17,10 +17,10 @@ using static MediatRAndRecordTypes.IntegrationTests.ConsultsControllerEndpoints;
 
 namespace MediatRAndRecordTypes.IntegrationTests;
 
-public class ConsultsControllerTests : IClassFixture<ApiTestFixture>
+public class ConsultsControllerTests : IClassFixture<MediatRAndRecordTypesApiFactory>
 {
-    private readonly ApiTestFixture _fixture;
-    public ConsultsControllerTests(ApiTestFixture fixture)
+    private readonly MediatRAndRecordTypesApiFactory _fixture;
+    public ConsultsControllerTests(MediatRAndRecordTypesApiFactory fixture)
     {
         _fixture = fixture;
     }

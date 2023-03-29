@@ -8,11 +8,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace MediatRAndRecordTypes.Testing;
 
-public class ApiTestFixture : WebApplicationFactory<Program>
+public class MediatRAndRecordTypesApiFactory : WebApplicationFactory<Program>
 {
     private readonly IConfiguration _configuration;
 
-    public ApiTestFixture()
+    public MediatRAndRecordTypesApiFactory()
     {
         _configuration = ConfigurationFactory.Create();
     }

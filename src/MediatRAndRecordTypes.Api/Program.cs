@@ -36,7 +36,11 @@ using (var scope = services.CreateScope())
 
     if (args.Contains("dropdb"))
     {
-        context.Database.EnsureDeleted();
+        context.Database.ExecuteSql($"DROP TABLE Consults");
+
+        context.Database.ExecuteSql($"DROP SCHEMA MediatRAndRecordTypes");
+
+        context.Database.ExecuteSql($"DELETE from __EFMigrationsHistory where MigrationId like '%_MediatRAndRecordTypes_%';");
     }
 
     if (args.Contains("migratedb"))
