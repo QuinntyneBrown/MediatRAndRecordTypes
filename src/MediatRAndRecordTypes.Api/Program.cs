@@ -14,7 +14,7 @@ app.UseSwagger(options => options.SerializeAsV2 = true);
 
 app.UseSwaggerUI(options =>
 {
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Clarity");
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", nameof(MediatRAndRecordTypes));
     options.RoutePrefix = string.Empty;
     options.DisplayOperationId();
 });
