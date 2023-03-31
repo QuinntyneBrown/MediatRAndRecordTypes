@@ -28,14 +28,13 @@ public class ConsultsControllerTests : IClassFixture<MediatRAndRecordTypesApiFac
     [Fact]
     public async Task Should_CreateConsult()
     {
+        var client = _fixture.CreateClient();
 
         var context = MediatRAndRecordTypesDbContextBuilder.WithDefaults();
 
-        var request = new CreateConsultRequest(Guid.NewGuid(), DateTime.UtcNow, DateTime.UtcNow.AddHours(1));
+        var request = new CreateConsultRequest(Guid.NewGuid(), DateTime.UtcNow.AddYears(2), DateTime.UtcNow.AddYears(2).AddHours(1));
 
         StringContent stringContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-
-        using var client = _fixture.CreateClient();
 
         var httpResponseMessage = await client.PostAsync(Post.CreateConsult, stringContent);
 
@@ -50,6 +49,8 @@ public class ConsultsControllerTests : IClassFixture<MediatRAndRecordTypesApiFac
     [Fact]
     public async Task Should_RemoveConsult()
     {
+        var client = _fixture.CreateClient();
+
         var consult = ConsultBuilder.WithDefaults();
 
         var context = MediatRAndRecordTypesDbContextBuilder.WithDefaults();
@@ -58,7 +59,7 @@ public class ConsultsControllerTests : IClassFixture<MediatRAndRecordTypesApiFac
 
         context.SaveChanges();
 
-        var httpResponseMessage = await _fixture.CreateClient().DeleteAsync(Delete.ConsultBy(consult.ConsultId));
+        var httpResponseMessage = await client.DeleteAsync(Delete.ConsultBy(consult.ConsultId));
 
         httpResponseMessage.EnsureSuccessStatusCode();
     }
@@ -66,6 +67,8 @@ public class ConsultsControllerTests : IClassFixture<MediatRAndRecordTypesApiFac
     [Fact]
     public async Task Should_RescheduleConsult()
     {
+        var client = _fixture.CreateClient();
+
         var consult = ConsultBuilder.WithDefaults();
 
         var context = MediatRAndRecordTypesDbContextBuilder.WithDefaults();
@@ -80,7 +83,7 @@ public class ConsultsControllerTests : IClassFixture<MediatRAndRecordTypesApiFac
 
         StringContent stringContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
-        var httpResponseMessage = await _fixture.CreateClient().PutAsync(Put.Reschedule, stringContent);
+        var httpResponseMessage = await client.PutAsync(Put.Reschedule, stringContent);
 
         httpResponseMessage.EnsureSuccessStatusCode();
 
@@ -94,6 +97,8 @@ public class ConsultsControllerTests : IClassFixture<MediatRAndRecordTypesApiFac
     [Fact]
     public async Task Should_GetConsults()
     {
+        var client = _fixture.CreateClient();
+
         var consult = ConsultBuilder.WithDefaults();
 
         var context = MediatRAndRecordTypesDbContextBuilder.WithDefaults();
@@ -102,7 +107,7 @@ public class ConsultsControllerTests : IClassFixture<MediatRAndRecordTypesApiFac
 
         context.SaveChanges();
 
-        var httpResponseMessage = await _fixture.CreateClient().GetAsync(Get.Consults);
+        var httpResponseMessage = await client.GetAsync(Get.Consults);
 
         httpResponseMessage.EnsureSuccessStatusCode();
 
@@ -114,6 +119,8 @@ public class ConsultsControllerTests : IClassFixture<MediatRAndRecordTypesApiFac
     [Fact]
     public async Task Should_GetConsultById()
     {
+        var client = _fixture.CreateClient();
+
         var consult = ConsultBuilder.WithDefaults();
 
         var context = MediatRAndRecordTypesDbContextBuilder.WithDefaults();
@@ -122,7 +129,7 @@ public class ConsultsControllerTests : IClassFixture<MediatRAndRecordTypesApiFac
 
         context.SaveChanges();
 
-        var httpResponseMessage = await _fixture.CreateClient().GetAsync(Get.ConsultBy(consult.ConsultId));
+        var httpResponseMessage = await client.GetAsync(Get.ConsultBy(consult.ConsultId));
 
         httpResponseMessage.EnsureSuccessStatusCode();
 

@@ -24,7 +24,7 @@ public class RescheduleHandler : IRequestHandler<RescheduleRequest, RescheduleRe
 
     public async Task<RescheduleResponse> Handle(RescheduleRequest request, CancellationToken cancellationToken)
     {
-        var consult = await _context.Consults.SingleAsync(x => x.ConsultId == request.ConsultId);
+        var consult = await _context.FindAsync<Consult>(request.ConsultId);
 
         consult.Reschedule(request.StartDate, request.EndDate);
 
