@@ -4,6 +4,7 @@
 using MediatR;
 using MediatRAndRecordTypes.Api.Data;
 using MediatRAndRecordTypes.Api.IntegrationEvents;
+using Microsoft.EntityFrameworkCore;
 
 namespace MediatRAndRecordTypes.Api.ConsultAggregateModel.Commands;
 
@@ -23,7 +24,7 @@ public class RescheduleHandler : IRequestHandler<RescheduleRequest, RescheduleRe
 
     public async Task<RescheduleResponse> Handle(RescheduleRequest request, CancellationToken cancellationToken)
     {
-        var consult = await _context.FindAsync<Consult>(request.ConsultId);
+        var consult = await _context.Consults.SingleAsync(x => x.ConsultId == request.ConsultId);
 
         consult.Reschedule(request.StartDate, request.EndDate);
 

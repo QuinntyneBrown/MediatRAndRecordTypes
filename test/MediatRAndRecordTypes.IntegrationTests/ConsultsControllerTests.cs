@@ -74,7 +74,7 @@ public class ConsultsControllerTests : IClassFixture<MediatRAndRecordTypesApiFac
 
         context.SaveChanges();
 
-        var newEndDate = DateTime.UtcNow;
+        var newEndDate = DateTime.UtcNow.AddYears(1);
 
         var request = new RescheduleRequest(consult.ConsultId, consult.DateRange.StartDate, newEndDate);
 

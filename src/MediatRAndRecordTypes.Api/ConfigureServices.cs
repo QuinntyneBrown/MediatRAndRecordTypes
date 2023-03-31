@@ -49,7 +49,7 @@ public static class ConfigureServices
 
         services.AddScoped<IMediatRAndRecordTypesDbContext, MediatRAndRecordTypesDbContext>();
 
-        services.AddDbContextPool<MediatRAndRecordTypesDbContext>(options =>
+        services.AddDbContext<MediatRAndRecordTypesDbContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                 builder => builder.MigrationsAssembly("MediatRAndRecordTypes.Api")
