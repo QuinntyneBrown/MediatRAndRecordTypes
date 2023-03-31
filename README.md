@@ -1,4 +1,4 @@
-# MediatR and C# 9 Record Types
+# MediatR and Record Types
 
 An example of how you can combine MediatR and Record types to build an api in the CQRS pattern with relatively minimal code.
 
